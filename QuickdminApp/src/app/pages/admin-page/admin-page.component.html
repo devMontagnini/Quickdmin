@@ -1,0 +1,18 @@
+<div class="page-container">
+  <div class='user-infos'>
+    <button mat-icon-button [matMenuTriggerFor]="adminPageMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #adminPageMenu="matMenu">
+      <button *ngFor="let menu of menus" mat-menu-item (click)="gotoPage(menu.path)">
+        {{menu.title}}
+      </button>
+    </mat-menu>
+    <span class="user-name"><strong>{{clientName}}</strong> - Painel Administrativo</span>
+    <button (click)="logout()" class="logout" color="warn" mat-button>
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

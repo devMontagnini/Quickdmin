@@ -1,0 +1,13 @@
+<div class="infos">
+  <span>Total páginas: {{totalPages}}</span> /
+  <span>registros: {{config.totalItems}}</span>
+</div>
+<div class="navigate" *ngIf="totalPages > 0">
+  <button [disabled]="isFirstPage()" mat-icon-button (click)="changePage('prev')">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span>{{config.pageIndex + 1}}</span>
+  <button [disabled]="isLastPage()" mat-icon-button (click)="changePage('next')">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

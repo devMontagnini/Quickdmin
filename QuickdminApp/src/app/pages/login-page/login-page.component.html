@@ -1,0 +1,31 @@
+<div class="login-container">
+  <mat-card>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="logo"><img src="assets/logo.png" /></div>
+      <div>
+        <mat-form-field appearence="fill">
+          <mat-label>E-mail:</mat-label>
+          <input autocomplete="email" matInput formControlName="email" required>
+          <mat-error *ngIf="showFormControlError('email')">
+            E-mail é obrigatório. 
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearence="fill">
+          <mat-label>Senha:</mat-label>
+          <input autocomplete="current-password" matInput formControlName="password" required type="password">
+          <mat-error *ngIf="showFormControlError('password')">
+            Senha é obrigatória. 
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="login-btn">
+        <button [class.spinner]="loading" [disabled]="loginForm.invalid || loading" mat-raised-button color="primary">
+          Login
+        </button>
+      </div>
+      <div class="form-error" *ngIf="errorMessage">{{errorMessage}}</div>
+    </form>
+  </mat-card>
+</div>

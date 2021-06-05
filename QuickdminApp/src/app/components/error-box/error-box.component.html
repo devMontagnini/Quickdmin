@@ -1,0 +1,7 @@
+<div class="error-container">
+  <mat-icon>error_outline</mat-icon>
+  <span>{{errorMessage}}</span>
+  <button (click)="onRetry.emit()" mat-stroked-button color="primary">
+    Tentar novamente
+  </button>
+</div>

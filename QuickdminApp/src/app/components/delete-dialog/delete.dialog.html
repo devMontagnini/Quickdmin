@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Deletar {{data.entity.name}}?</h1>
+<div mat-dialog-content>
+  <p>Confirme abaixo se realmente deseja deletar este registro.</p>
+</div>
+<div mat-dialog-actions  *ngIf="!isLoading">
+  <button mat-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-raised-button color="warn" (click)="confirmDelete()">Deletar</button>
+</div>
+<div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
+<div *ngIf="isLoading" class="loading">
+  <mat-spinner diameter="20"></mat-spinner>
+</div>

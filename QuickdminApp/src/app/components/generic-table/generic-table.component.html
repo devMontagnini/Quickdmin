@@ -1,0 +1,35 @@
+<mat-table mt-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td (click)="onSelectItem.emit(element)" mat-cell *matCellDef="let element">
+      {{ element.id }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nome</th>
+    <td (click)="onSelectItem.emit(element)" mat-cell *matCellDef="let element">
+      {{ element.name }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Data de Registro</th>
+    <td (click)="onSelectItem.emit(element)" mat-cell *matCellDef="let element">
+      {{ element.created_at }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="options">
+    <th mat-header-cell *matHeaderCellDef>Ações</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn">
+        <mat-icon (click)="onDeleteItem.emit(element)">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr *matNoDataRow>
+    <td [attr.colspan]="displayedColumns.length" class="no-results">
+      Sem registros na busca
+    </td>
+  </tr>
+</mat-table>

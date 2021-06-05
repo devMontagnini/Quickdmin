@@ -1,0 +1,47 @@
+<div class="search-form-container">
+  <app-page-title [title]="getTitle()"></app-page-title>
+  <button mat-mini-fab color="primary" (click)="gotoNew()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <form [formGroup]="searchForm">
+    <mat-form-field appearence="fill">
+      <mat-label>Buscar pelo nome:</mat-label>
+      <input matInput formControlName="searchTerm">
+    </mat-form-field>
+    <button 
+      (click)="search()" 
+      [disabled]="searchForm.invalid" 
+      mat-raised-button 
+      color="primary">
+      Buscar
+    </button>
+    <button 
+      (click)="clearFields()" 
+      class="clear-btn" 
+      mat-raised-button>
+      Limpar Campos
+    </button>
+  </form>
+</div>
+<div class="content">
+  <app-loading-box 
+    *ngIf="layoutMode == 'searching'"
+    loadingText="Buscando...">
+  </app-loading-box>
+  <app-error-box 
+    *ngIf="layoutMode == 'searchError'"
+    errorMessage="Ocorreu algum erro na busca."
+    (onRetry)="search()">
+  </app-error-box>
+  <app-generic-table
+    *ngIf="layoutMode == 'showResults'"
+    [dataSource]="searchResult!.resultItems"
+    (onSelectItem)="gotoDetail($event)"
+    (onDeleteItem)="deleteItem($event)">
+  </app-generic-table>
+</div>
+<app-pagination 
+  *ngIf="searchResult" 
+  [config]="searchResult!.search"
+  (onChangePage)="searchResult!.search.pageIndex = $event; search()">
+</app-pagination>
