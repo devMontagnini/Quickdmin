@@ -33,7 +33,7 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
 import { UnauthorizedHttpInterceptor } from './interceptors/unauthorized-http.interceptor';
 import { PageTitleComponent } from './components/page-title-component/page-title.component';
 import { AuthorizationHttpInterceptor } from './interceptors/authorization-http.interceptor';
-import { FormModelDataBuilderComponent } from './components/form-model-data-builder/form-model-data-buildercomponent';
+import { FormModelDataBuilderComponent } from './components/form-model-data-builder/form-model-data-builder.component';
 
 @NgModule({
   declarations: [
