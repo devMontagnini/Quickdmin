@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { SearchResultItem } from "../../interfaces/search-result-item.model";
+import { ISearchResultItem } from "../../interfaces/search-result-item.interface";
 
 @Component({
   selector: 'app-generic-table',
@@ -7,8 +7,8 @@ import { SearchResultItem } from "../../interfaces/search-result-item.model";
   styleUrls: ['./generic-table.component.sass'],
 })
 export class GenericTableComponent {
-  @Input('dataSource') dataSource: SearchResultItem[] = [];
-  @Output('onSelectItem') onSelectItem = new EventEmitter<SearchResultItem>();
-  @Output('onDeleteItem') onDeleteItem = new EventEmitter<SearchResultItem>();
+  @Input('dataSource') dataSource: ISearchResultItem[] = [];
+  @Output('onSelectItem') onSelectItem = new EventEmitter<ISearchResultItem>();
+  @Output('onDeleteItem') onDeleteItem = new EventEmitter<ISearchResultItem>();
   displayedColumns: string[] = ['id', 'name', 'createdAt', 'options' ];
 }

@@ -1,7 +1,7 @@
-import { SearchResultItem } from "./search-result-item.model";
+import { ISearchResultItem } from "./search-result-item.interface";
 import { PaginateSearchModel } from "../models/paginate-search.model";
 
-export interface SearchResult {
+export interface ISearchResult {
   search: PaginateSearchModel & { totalItems: number };
-  resultItems: SearchResultItem[];
+  resultItems: ISearchResultItem[];
 }

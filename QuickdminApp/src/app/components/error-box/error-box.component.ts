@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { SearchResultItem } from "src/app/interfaces/search-result-item.model";
 
 @Component({
   selector: 'app-error-box',

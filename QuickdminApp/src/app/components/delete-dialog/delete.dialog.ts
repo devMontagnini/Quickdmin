@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { SearchResultItem } from "../../interfaces/search-result-item.model";
+import { ISearchResultItem } from "../../interfaces/search-result-item.interface";
 
 @Component({
   templateUrl: 'delete.dialog.html',
@@ -15,7 +15,7 @@ export class DeleteDialog {
   constructor(
     private dialogRef: MatDialogRef<DeleteDialog>,
     @Inject(MAT_DIALOG_DATA) public data: { 
-      entity: SearchResultItem, 
+      entity: ISearchResultItem, 
       deleteAction: () => Observable<any> 
     }
   ) { }

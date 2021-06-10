@@ -1,0 +1,26 @@
+<h1>{{getTitle()}}</h1>
+<div class="loading-container" *ngIf="layoutMode === 'loadingModelData'">
+  <mat-spinner diameter="20"></mat-spinner>
+  <span>Carregando dados...</span>
+</div>
+<div class="loading-register-container" *ngIf="layoutMode === 'loadModelDataError'">
+  <mat-icon>error</mat-icon>
+  <span>Erro ao carregar dados</span>
+  <div class="btns">
+    <button mat-raised-button color="primary" (click)="loadModel()">
+      Recarregar
+    </button>
+  </div>
+</div>
+<form #formDom *ngIf="layoutMode === 'showForm'" [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+  <app-form-model-data-builder [modelData]="modelData"></app-form-model-data-builder>
+  <div class="btns">
+    <button [class.spinner]="submittingForm" [disabled]="modelForm.invalid || submittingForm" mat-raised-button color="primary">
+      Enviar
+    </button>
+    <button *ngIf="entityHasListPage" (click)="onBackPage($event)" mat-raised-button>
+      Voltar
+    </button>
+  </div>
+  <div *ngIf="submitErrorMessage" class="error">{{submitErrorMessage}}</div>
+</form>

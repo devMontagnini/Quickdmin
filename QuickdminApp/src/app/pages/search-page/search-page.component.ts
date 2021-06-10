@@ -4,10 +4,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { EntityRoutes } from 'src/app/routing/entity-routes';
 import { BaseApiService } from 'src/app/services/base.service';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
-import { SearchResult } from 'src/app/interfaces/search-result.interface';
+import { ISearchResult } from 'src/app/interfaces/search-result.interface';
 import { PaginateSearchModel } from 'src/app/models/paginate-search.model';
 import { DeleteDialog } from 'src/app/components/delete-dialog/delete.dialog';
-import { SearchResultItem } from 'src/app/interfaces/search-result-item.model';
+import { ISearchResultItem } from 'src/app/interfaces/search-result-item.interface';
 
 @Component({
   selector: 'app-search-page',
@@ -18,7 +18,7 @@ export class SearchPageComponent implements OnInit {
 
   searchTerm = '';
   entityRoute = '';
-  searchResult?: SearchResult;
+  searchResult?: ISearchResult;
   layoutMode: 'searching' | 'searchError' | 'showResults' = 'searching';
   searchForm = new FormGroup({ searchTerm: new FormControl(this.searchTerm) });
 
@@ -50,7 +50,7 @@ export class SearchPageComponent implements OnInit {
     this.searchResult?.search.pageIndex
     this.apiService.paginate(paginatedSearch)
       .subscribe(
-        (searchResult: SearchResult) => {
+        (searchResult: ISearchResult) => {
           this.searchResult = searchResult;
           this.layoutMode = 'showResults';
         },
@@ -68,7 +68,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   gotoDetail(event: any): void {
-    const entity = event as SearchResultItem;
+    const entity = event as ISearchResultItem;
     this.router.navigate(
       [entity.id.toString()], 
       { relativeTo: this.activateRoute }
@@ -76,7 +76,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   deleteItem(event: any): void {
-    const entity = event as SearchResultItem;
+    const entity = event as ISearchResultItem;
     const deleteAction = () => this.apiService.delete(entity.id);
     this.dialogService.open(DeleteDialog, { data: { entity, deleteAction }})
       .afterClosed()

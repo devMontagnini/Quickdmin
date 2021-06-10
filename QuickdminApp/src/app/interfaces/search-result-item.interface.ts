@@ -1,4 +1,4 @@
-export interface SearchResultItem {
+export interface ISearchResultItem {
   id: number;
   name: string;
   createdAt: string;

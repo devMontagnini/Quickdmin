@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DeleteDialog } from './components/delete-dialog/delete.dialog';
+import { FormPageComponent } from './pages/form-page/form-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
@@ -32,11 +33,13 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
 import { UnauthorizedHttpInterceptor } from './interceptors/unauthorized-http.interceptor';
 import { PageTitleComponent } from './components/page-title-component/page-title.component';
 import { AuthorizationHttpInterceptor } from './interceptors/authorization-http.interceptor';
+import { FormModelDataBuilderComponent } from './components/form-model-data-builder/form-model-data-buildercomponent';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeleteDialog,
+    FormPageComponent,
     ErrorBoxComponent,
     AdminPageComponent,
     PageTitleComponent,
@@ -46,6 +49,7 @@ import { AuthorizationHttpInterceptor } from './interceptors/authorization-http.
     LoadingBoxComponent,
     GenericTableComponent,
     DashboardPageComponent,
+    FormModelDataBuilderComponent,
   ],
   imports: [
     MatCardModule,
