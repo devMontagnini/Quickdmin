@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { ServicesModule } from './services/services.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,9 +24,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorBoxComponent } from './components/error-box/error-box.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { LoadingBoxComponent } from './components/loading-box/loading-box.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
@@ -34,6 +35,7 @@ import { UnauthorizedHttpInterceptor } from './interceptors/unauthorized-http.in
 import { PageTitleComponent } from './components/page-title-component/page-title.component';
 import { AuthorizationHttpInterceptor } from './interceptors/authorization-http.interceptor';
 import { FormModelDataBuilderComponent } from './components/form-model-data-builder/form-model-data-builder.component';
+import { SimpleTextFieldComponent } from './components/form-model-data-builder/fields/simple-text-field/simple-text-field.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { FormModelDataBuilderComponent } from './components/form-model-data-buil
     GenericTableComponent,
     DashboardPageComponent,
     FormModelDataBuilderComponent,
+    SimpleTextFieldComponent,
   ],
   imports: [
     MatCardModule,
@@ -71,6 +74,7 @@ import { FormModelDataBuilderComponent } from './components/form-model-data-buil
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    ServicesModule.forRoot(true),
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

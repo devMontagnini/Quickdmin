@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { PaginateSearchModel } from "src/app/models/paginate-search.model";
+import { IPaginateSearch } from "../../shared/interfaces/paginate-search.interface";
 
 @Component({
   selector: 'app-pagination',
@@ -9,7 +9,7 @@ import { PaginateSearchModel } from "src/app/models/paginate-search.model";
 export class PaginationComponent {
 
   @Output('onChangePage') onChangePage = new EventEmitter<number>();
-  @Input('config') config!: PaginateSearchModel & { totalItems: number };
+  @Input('config') config!: IPaginateSearch & { totalItems: number };
 
   get totalPages(): number {
     return Math.ceil(this.config.totalItems/this.config.itemsByPage);

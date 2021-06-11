@@ -1,7 +1,8 @@
+import { IPaginateSearch } from "./paginate-search.interface";
 import { ISearchResultItem } from "./search-result-item.interface";
-import { PaginateSearchModel } from "../models/paginate-search.model";
+
 
 export interface ISearchResult {
-  search: PaginateSearchModel & { totalItems: number };
+  search: IPaginateSearch & { totalItems: number };
   resultItems: ISearchResultItem[];
 }

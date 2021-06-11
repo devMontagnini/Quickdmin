@@ -1,10 +1,12 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Location } from "@angular/common";
+import { Component, Inject } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { ModelRoutes } from "../../routing/model-routes";
 import { ActivatedRoute, UrlSegment } from "@angular/router";
-import { BaseApiService } from "src/app/services/base.service";
-import { EntityRoutes } from "src/app/routing/entity-routes";
-import { IModelData } from "src/app/interfaces/model-data.interface";
+import { MODEL_SERVICE_TOKEN } from "../../services/constants";
+import { IField } from "../../shared/interfaces/field.interface";
+import { IModelData } from "../../shared/interfaces/model-data.interface";
+import { IModelService } from "../../services/interface/model.service.interface";
 
 @Component({
   selector: 'app-form-page',
@@ -15,32 +17,30 @@ export class FormPageComponent {
 
   submittingForm = false;
   modelData?: IModelData;
-  entityRoute: string = '';
+  modelRoute: string = '';
+  modelHasListPage = false;
   identifierRoute: string = '';
-  modelForm = new FormGroup({ });
   submitErrorMessage: string = '';
+  modelDataForm = new FormGroup({ });
   layoutMode: 'loadingModelData' | 'loadModelDataError' | 'showForm' = 'loadingModelData';
-  entityHasListPage = false;
-
-  @ViewChild('formDom') formDom?: ElementRef;
 
   constructor(
     public location: Location,
-    private apiService: BaseApiService,
     private activateRoute: ActivatedRoute,
+    @Inject(MODEL_SERVICE_TOKEN) private apiService: IModelService,
   ) {
     this.activateRoute.url.subscribe((value: UrlSegment[]) => {
-      this.entityRoute = value[0].path;
+      this.modelRoute = value[0].path;
       this.identifierRoute = value[1]?.path;
-      this.apiService.setEntityRoute(this.entityRoute);
-      this.entityHasListPage = EntityRoutes.some(c => c.path === this.entityRoute && c.hasMany);
+      this.apiService.setModelRoute(this.modelRoute);
+      this.modelHasListPage = ModelRoutes.some(c => c.path === this.modelRoute && c.hasMany);
       this.loadModel();
     });
   }
 
   getTitle(): string {
-    const entity = EntityRoutes.find(c => c.path === this.entityRoute);
-    return `Cadastrar ${entity?.title || ''}`;
+    const modelRoute = ModelRoutes.find(c => c.path === this.modelRoute);
+    return `Cadastrar ${modelRoute?.title || ''}`;
   }
 
   loadModel(): void {
@@ -60,10 +60,9 @@ export class FormPageComponent {
   }
 
   setupForm(): void {
-    const structure = this.modelData!.structure;
-    Object.keys(structure).forEach((key: string) => {
-      const defaultValue = structure[key].defaultValue;
-      this.modelForm.addControl(key, new FormControl(defaultValue));
+    this.modelData?.fields.forEach((field: IField) => {
+      const value = field.value || field.defaultValue;
+      this.modelDataForm.addControl(field.name, new FormControl(value));
     });
   }
 
@@ -72,5 +71,9 @@ export class FormPageComponent {
     this.location.back();
   }
 
-  onSubmit  () { }
+  onSubmit() {
+    this.submittingForm = true;
+    this.submitErrorMessage = '';
+    const data = this.modelDataForm.value;
+  }
 }

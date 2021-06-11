@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationApiService } from 'src/app/services/authentication-api.service';
-import { AuthenticatedUserService } from 'src/app/services/authenticated-user.service';
-import { HttpHelper } from 'src/app/helpers/http.helper';
+import { HttpHelper } from '../../services/implementations/api/helpers/http.helper';
+import { IAuthenticationService } from '../../services/interface/authentication.service.interface';
+import { IAuthenticatedUserService } from '../../services/interface/authenticated-user.service.interface';
+import { AUTHENTICATED_USER_SERVICE_TOKEN, AUTHENTICATION_SERVICE_TOKEN } from '../../services/constants';
 
 @Component({
   selector: 'app-login-page',
@@ -23,8 +24,8 @@ export class LoginPageComponent {
 
   constructor(
     private router: Router,
-    private authenticatedUserService: AuthenticatedUserService,
-    private authenticationApiService: AuthenticationApiService,
+    @Inject(AUTHENTICATION_SERVICE_TOKEN) private authenticationApiService: IAuthenticationService,
+    @Inject(AUTHENTICATED_USER_SERVICE_TOKEN) private authenticatedUserService: IAuthenticatedUserService,
   ) { }
 
   onSubmit() {

@@ -1,0 +1,3 @@
+<div *ngFor="let field of fields">
+  <app-simple-text-field *ngIf="field.type === types.simpleText" [field]="field"></app-simple-text-field>
+</div>

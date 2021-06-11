@@ -2,8 +2,8 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
-import { AuthenticatedUserService } from '../services/authenticated-user.service';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { AuthenticatedUserService } from '../services/implementations/common/authenticated-user.service';
 
 @Injectable()
 export class UnauthorizedHttpInterceptor implements HttpInterceptor {

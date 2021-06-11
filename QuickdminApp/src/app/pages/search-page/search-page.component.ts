@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
-import { EntityRoutes } from 'src/app/routing/entity-routes';
-import { BaseApiService } from 'src/app/services/base.service';
+import { ModelRoutes } from '../../routing/model-routes';
+import { MODEL_SERVICE_TOKEN } from '../../services/constants';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
-import { ISearchResult } from 'src/app/interfaces/search-result.interface';
-import { PaginateSearchModel } from 'src/app/models/paginate-search.model';
-import { DeleteDialog } from 'src/app/components/delete-dialog/delete.dialog';
-import { ISearchResultItem } from 'src/app/interfaces/search-result-item.interface';
+import { DeleteDialog } from '../../components/delete-dialog/delete.dialog';
+import { ISearchResult } from '../../shared/interfaces/search-result.interface';
+import { IModelService } from '../../services/interface/model.service.interface';
+import { ISearchResultItem } from '../../shared/interfaces/search-result-item.interface';
 
 @Component({
   selector: 'app-search-page',
@@ -16,8 +16,8 @@ import { ISearchResultItem } from 'src/app/interfaces/search-result-item.interfa
 })
 export class SearchPageComponent implements OnInit {
 
+  modelRoute = '';
   searchTerm = '';
-  entityRoute = '';
   searchResult?: ISearchResult;
   layoutMode: 'searching' | 'searchError' | 'showResults' = 'searching';
   searchForm = new FormGroup({ searchTerm: new FormControl(this.searchTerm) });
@@ -25,12 +25,12 @@ export class SearchPageComponent implements OnInit {
   constructor(
     private router: Router,
     private dialogService: MatDialog,
-    private apiService: BaseApiService,
     private activateRoute: ActivatedRoute,
+    @Inject(MODEL_SERVICE_TOKEN) private modelService: IModelService,
   ) {
     this.activateRoute.url.subscribe((value: UrlSegment[]) => {
-      this.entityRoute = value[0].path;
-      this.apiService.setEntityRoute(this.entityRoute);
+      this.modelRoute = value[0].path;
+      this.modelService.setModelRoute(this.modelRoute);
     });
   }
 
@@ -39,16 +39,16 @@ export class SearchPageComponent implements OnInit {
   }
 
   getTitle(): string {
-    const entity = EntityRoutes.find(c => c.path === this.entityRoute);
-    return `Listar ${entity?.title || 'Registros'}`;
+    const modelRoute = ModelRoutes.find(c => c.path === this.modelRoute);
+    return `Listar ${modelRoute?.title || 'Registros'}`;
   }
 
   search() {
     this.layoutMode = 'searching';
-    const paginatedSearch = this.searchResult?.search || new PaginateSearchModel();
-    paginatedSearch.searchTerm = this.searchForm.value['searchTerm'];
+    const searchTerm = this.searchForm.value['searchTerm'];
+    const paginatedSearch = this.searchResult?.search || { pageIndex: 0, itemsByPage: 5, searchTerm };
     this.searchResult?.search.pageIndex
-    this.apiService.paginate(paginatedSearch)
+    this.modelService.paginate(paginatedSearch)
       .subscribe(
         (searchResult: ISearchResult) => {
           this.searchResult = searchResult;
@@ -68,17 +68,17 @@ export class SearchPageComponent implements OnInit {
   }
 
   gotoDetail(event: any): void {
-    const entity = event as ISearchResultItem;
+    const model = event as ISearchResultItem;
     this.router.navigate(
-      [entity.id.toString()], 
+      [model.id.toString()], 
       { relativeTo: this.activateRoute }
     );
   }
 
   deleteItem(event: any): void {
-    const entity = event as ISearchResultItem;
-    const deleteAction = () => this.apiService.delete(entity.id);
-    this.dialogService.open(DeleteDialog, { data: { entity, deleteAction }})
+    const model = event as ISearchResultItem;
+    const deleteAction = () => this.modelService.delete(model.id);
+    this.dialogService.open(DeleteDialog, { data: { model, deleteAction }})
       .afterClosed()
       .subscribe((deleted: boolean) => {
         if (deleted) {

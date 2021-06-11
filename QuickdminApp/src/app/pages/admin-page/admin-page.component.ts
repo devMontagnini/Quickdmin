@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EntityRoutes } from 'src/app/routing/entity-routes';
-import { ClientSettings } from 'src/settings/client.settings';
-import { AuthenticatedUserService } from 'src/app/services/authenticated-user.service';
+import { Component, Inject } from '@angular/core';
+import { ModelRoutes } from '../../routing/model-routes';
+import { ClientSettings } from '../../../settings/client.settings';
+import { AUTHENTICATED_USER_SERVICE_TOKEN } from '../../services/constants';
+import { AuthenticatedUserService } from 'src/app/services/implementations/common/authenticated-user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -12,14 +13,14 @@ import { AuthenticatedUserService } from 'src/app/services/authenticated-user.se
 export class AdminPageComponent {
 
   clientName = ClientSettings.name;
-  menus = EntityRoutes.map(c => ({
+  menus = ModelRoutes.map(c => ({
     title: c.title,
     path: `${c.path}${c.hasMany ? '' : '/first'}`,
   }));
 
   constructor(
     private router: Router,
-    private authenticatedUserService: AuthenticatedUserService
+    @Inject(AUTHENTICATED_USER_SERVICE_TOKEN) private authenticatedUserService: AuthenticatedUserService
   ) { }
 
   gotoPage(url: string) {

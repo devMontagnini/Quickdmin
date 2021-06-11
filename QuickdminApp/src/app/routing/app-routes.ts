@@ -1,4 +1,4 @@
-import { EntityRoutes } from './entity-routes';
+import { ModelRoutes } from './model-routes';
 import { Routes, UrlSegment } from '@angular/router';
 import { AuthenticatedUserGuard } from './authenticated-user.guard';
 import { FormPageComponent } from '../pages/form-page/form-page.component';
@@ -14,14 +14,14 @@ export const AppRoutes: Routes = [
     { 
       component: SearchPageComponent,
       matcher: (url: UrlSegment[]) => {
-        const someRouteMatched = EntityRoutes.some(c => c.hasMany && c.path === url[0]?.path);
+        const someRouteMatched = ModelRoutes.some(c => c.hasMany && c.path === url[0]?.path);
         return url.length === 1 && someRouteMatched ? { consumed: url } : null;
       },
     },
     { 
       component: FormPageComponent,
       matcher: (url: UrlSegment[]) => {
-        const someRouteMatched = EntityRoutes.some(c => c.path === url[0].path);
+        const someRouteMatched = ModelRoutes.some(c => c.path === url[0].path);
         const paramValueMathed = url.length === 2 && (url[1].path === 'first' || /^\d+$/.test(url[1].path));
         return someRouteMatched && paramValueMathed ? { consumed: url } : null;
       },

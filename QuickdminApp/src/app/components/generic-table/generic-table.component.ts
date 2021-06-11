@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { ISearchResultItem } from "../../interfaces/search-result-item.interface";
+import { ISearchResultItem } from "../../shared/interfaces/search-result-item.interface";
 
 @Component({
   selector: 'app-generic-table',

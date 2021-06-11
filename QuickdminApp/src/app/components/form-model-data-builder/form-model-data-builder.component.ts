@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { IModelData } from "src/app/interfaces/model-data.interface";
+import { IField } from "../../shared/interfaces/field.interface";
+import { FieldTypeEnum } from "../../shared/enums/field-type.enum";
 
 @Component({
   selector: 'app-form-model-data-builder',
@@ -7,5 +8,6 @@ import { IModelData } from "src/app/interfaces/model-data.interface";
   styleUrls: ['./form-model-data-builder.component.sass'],
 })
 export class FormModelDataBuilderComponent {
-  @Input('modelData') modelData?: IModelData;
+  types = FieldTypeEnum;
+  @Input('fields') fields: IField[] = [];
 }
