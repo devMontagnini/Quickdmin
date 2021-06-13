@@ -3,13 +3,12 @@
   <button mat-mini-fab color="primary" (click)="gotoNew()">
     <mat-icon>add</mat-icon>
   </button>
-  <form [formGroup]="searchForm">
+  <form [formGroup]="searchForm" (ngSubmit)="onSearchFormSubmit()">
     <mat-form-field appearence="fill">
       <mat-label>Buscar pelo nome:</mat-label>
       <input matInput formControlName="searchTerm">
     </mat-form-field>
     <button 
-      (click)="search()" 
       [disabled]="searchForm.invalid" 
       mat-raised-button 
       color="primary">
@@ -41,7 +40,7 @@
   </app-generic-table>
 </div>
 <app-pagination 
-  *ngIf="searchResult" 
+  *ngIf="layoutMode == 'showResults'" 
   [config]="searchResult!.search"
   (onChangePage)="searchResult!.search.pageIndex = $event; search()">
 </app-pagination>

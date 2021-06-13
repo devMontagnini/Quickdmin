@@ -17,10 +17,9 @@ import { ISearchResultItem } from '../../shared/interfaces/search-result-item.in
 export class SearchPageComponent implements OnInit {
 
   modelRoute = '';
-  searchTerm = '';
   searchResult?: ISearchResult;
   layoutMode: 'searching' | 'searchError' | 'showResults' = 'searching';
-  searchForm = new FormGroup({ searchTerm: new FormControl(this.searchTerm) });
+  searchForm = new FormGroup({ searchTerm: new FormControl() });
 
   constructor(
     private router: Router,
@@ -45,9 +44,12 @@ export class SearchPageComponent implements OnInit {
 
   search() {
     this.layoutMode = 'searching';
-    const searchTerm = this.searchForm.value['searchTerm'];
-    const paginatedSearch = this.searchResult?.search || { pageIndex: 0, itemsByPage: 5, searchTerm };
-    this.searchResult?.search.pageIndex
+    const paginatedSearch = {
+      searchTerm : this.searchForm.value.searchTerm,
+      pageIndex: this.searchResult?.search?.pageIndex || 0,
+      itemsByPage: this.searchResult?.search?.itemsByPage || 5,
+    };
+    
     this.modelService.paginate(paginatedSearch)
       .subscribe(
         (searchResult: ISearchResult) => {
@@ -60,6 +62,11 @@ export class SearchPageComponent implements OnInit {
 
   clearFields() {
     this.searchForm.reset();
+  }
+
+  onSearchFormSubmit() {
+    if (this.searchResult)
+      this.searchResult!.search.pageIndex = 0;
     this.search();
   }
 

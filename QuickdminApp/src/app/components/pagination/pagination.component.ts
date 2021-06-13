@@ -27,5 +27,4 @@ export class PaginationComponent {
     this.config.pageIndex += direction === 'next' ? 1 : -1;
     this.onChangePage.emit(this.config.pageIndex);
   }
-
 }

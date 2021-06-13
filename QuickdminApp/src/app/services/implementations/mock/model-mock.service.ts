@@ -95,23 +95,29 @@ export class ModelMockService implements IModelService {
   }
 
   paginate(paginate: IPaginateSearch): Observable<ISearchResult> {
-    const searchTerm = (paginate.searchTerm || '').trim().toLocaleLowerCase();
-    const items = this.modelListMock
-      .filter(c => {
-        const itemNameField = c.fields.find(field => field.name === 'name');
-        return itemNameField?.value?.toLocaleLowerCase().indexOf(searchTerm);
-      })
-      .slice(paginate.pageIndex, paginate.itemsByPage);
+    return new Observable<ISearchResult>((subscriber) => {
+      const skipNumber = paginate.pageIndex * paginate.itemsByPage;
+      const searchTerm = (paginate.searchTerm || '').trim().toLocaleLowerCase();
 
-    return new Observable<ISearchResult>((subscriber) => 
+      let totalItems = 0;
+      const items = this.modelListMock
+        .filter(c => {
+          const itemNameField = c.fields.find(field => field.name === 'name');
+          const itemNameValue = itemNameField?.value?.toLocaleLowerCase();
+          const matched = itemNameValue.indexOf(searchTerm) > -1;
+          if (matched) totalItems++;
+          return matched;
+        })
+        .slice(skipNumber, skipNumber + paginate.itemsByPage);
+        
       subscriber.next({
-        search: { ...paginate, totalItems: items.length },
+        search: { ...paginate, totalItems },
         resultItems: items.map(c => ({ 
           id: c.id,
           name: c.fields.find(field => field.name === 'name')?.value,
           createdAt: c.fields.find(field => field.name === 'createdAt')?.value,
          })), 
-      })
-    );
+      });
+    });
   }
 }
