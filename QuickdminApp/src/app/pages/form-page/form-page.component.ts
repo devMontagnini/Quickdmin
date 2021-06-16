@@ -1,12 +1,11 @@
 import { Location } from "@angular/common";
 import { Component, Inject } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
 import { ModelRoutes } from "../../routing/model-routes";
 import { ActivatedRoute, UrlSegment } from "@angular/router";
 import { MODEL_SERVICE_TOKEN } from "../../services/constants";
-import { IField } from "../../shared/interfaces/field.interface";
 import { IModelData } from "../../shared/interfaces/model-data.interface";
 import { IModelService } from "../../services/interface/model.service.interface";
+import { ModelFormGroupHelper } from "src/app/shared/helpers/model-form-group.helper";
 
 @Component({
   selector: 'app-form-page',
@@ -21,7 +20,7 @@ export class FormPageComponent {
   modelHasListPage = false;
   identifierRoute: string = '';
   submitErrorMessage: string = '';
-  modelDataForm = new FormGroup({ });
+  modelFormGroup = new ModelFormGroupHelper({ });
   layoutMode: 'loadingModelData' | 'loadModelDataError' | 'showForm' = 'loadingModelData';
 
   constructor(
@@ -52,18 +51,11 @@ export class FormPageComponent {
     request.subscribe(
       (modelData) => {
         this.modelData = modelData;
-        this.setupForm();
+        this.modelFormGroup.setModelData(this.modelData);
         this.layoutMode = 'showForm';
       },
       (error) => this.layoutMode = 'loadModelDataError',
     )
-  }
-
-  setupForm(): void {
-    this.modelData?.fields.forEach((field: IField) => {
-      const value = field.value || field.defaultValue;
-      this.modelDataForm.addControl(field.name, new FormControl(value));
-    });
   }
 
   onBackPage(event: Event) {
@@ -74,6 +66,6 @@ export class FormPageComponent {
   onSubmit() {
     this.submittingForm = true;
     this.submitErrorMessage = '';
-    const data = this.modelDataForm.value;
+    const data = this.modelFormGroup.value;
   }
 }

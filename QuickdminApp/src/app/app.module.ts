@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DeleteDialog } from './components/delete-dialog/delete.dialog';
 import { FormPageComponent } from './pages/form-page/form-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -27,6 +28,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorBoxComponent } from './components/error-box/error-box.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { ModelFormComponent } from './components/model-form/model-form.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { LoadingBoxComponent } from './components/loading-box/loading-box.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
@@ -34,8 +36,7 @@ import { GenericTableComponent } from './components/generic-table/generic-table.
 import { UnauthorizedHttpInterceptor } from './interceptors/unauthorized-http.interceptor';
 import { PageTitleComponent } from './components/page-title-component/page-title.component';
 import { AuthorizationHttpInterceptor } from './interceptors/authorization-http.interceptor';
-import { FormModelDataBuilderComponent } from './components/form-model-data-builder/form-model-data-builder.component';
-import { SimpleTextFieldComponent } from './components/form-model-data-builder/fields/simple-text-field/simple-text-field.component';
+import { SimpleTextFieldComponent } from './components/model-form/fields/simple-text-field/simple-text-field.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SimpleTextFieldComponent } from './components/form-model-data-builder/f
     DeleteDialog,
     FormPageComponent,
     ErrorBoxComponent,
+    ModelFormComponent,
     AdminPageComponent,
     PageTitleComponent,
     LoginPageComponent,
@@ -51,7 +53,6 @@ import { SimpleTextFieldComponent } from './components/form-model-data-builder/f
     LoadingBoxComponent,
     GenericTableComponent,
     DashboardPageComponent,
-    FormModelDataBuilderComponent,
     SimpleTextFieldComponent,
   ],
   imports: [

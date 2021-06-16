@@ -16,10 +16,9 @@ export class LoginPageComponent {
 
   loading = false;
   errorMessage: string = '';
-  loginModel = { email: '', password: '' };
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl(this.loginModel.email, [Validators.required, Validators.email ]),
-    password: new FormControl(this.loginModel.password, [Validators.required ]),
+    email: new FormControl(null, [Validators.required, Validators.email ]),
+    password: new FormControl(null, [Validators.required ]),
   });
 
   constructor(

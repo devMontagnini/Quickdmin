@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModelRoutes } from '../../routing/model-routes';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MODEL_SERVICE_TOKEN } from '../../services/constants';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { DeleteDialog } from '../../components/delete-dialog/delete.dialog';
