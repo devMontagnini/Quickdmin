@@ -1,7 +1,7 @@
 import { Location } from "@angular/common";
-import { Component, Inject } from "@angular/core";
 import { ModelRoutes } from "../../routing/model-routes";
 import { ActivatedRoute, UrlSegment } from "@angular/router";
+import { Component, Inject } from "@angular/core";
 import { MODEL_SERVICE_TOKEN } from "../../services/constants";
 import { IModelData } from "../../shared/interfaces/model-data.interface";
 import { IModelService } from "../../services/interface/model.service.interface";

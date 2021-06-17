@@ -9,5 +9,5 @@ import { ModelFormGroupHelper } from "src/app/shared/helpers/model-form-group.he
 })
 export class ModelFormComponent {
   types = FieldTypeEnum;
-  @Input('formGroup') formGroup?: ModelFormGroupHelper;
+  @Input('formGroup') formGroup!: ModelFormGroupHelper;
 }

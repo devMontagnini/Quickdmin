@@ -1,10 +1,10 @@
-<div *ngIf="formGroup" [formGroup]="formGroup" class="fields-container">
+<div [formGroup]="formGroup" class="fields-container">
   <div *ngFor="let field of (formGroup?.modelData?.fields || [])">
-    <app-simple-text-field
+    <mf-text-field
       *ngIf="field.type === types.simpleText"
       [required]="field.required || false" 
       [formControlName]="field.name"
       [field]="field">
-    </app-simple-text-field>
+    </mf-text-field>
   </div>
 </div>
