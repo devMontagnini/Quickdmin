@@ -1,10 +1,10 @@
-<div [formGroup]="formGroup" class="fields-container">
-  <div *ngFor="let field of (formGroup?.modelData?.fields || [])">
-    <mf-text-field
-      *ngIf="field.type === types.simpleText"
-      [required]="field.required || false" 
-      [formControlName]="field.name"
-      [field]="field">
-    </mf-text-field>
+<div class="fields-container">
+  <div *ngFor="let control of getControls()">
+    <ng-container [ngSwitch]="control.field.type">
+      <mf-select *ngSwitchCase="types.select" [control]="control"></mf-select>
+      <mf-textarea *ngSwitchCase="types.textarea" [control]="control"></mf-textarea>
+      <mf-checkbox *ngSwitchCase="types.checkbox" [control]="control"></mf-checkbox>
+      <mf-text *ngSwitchDefault [control]="control"></mf-text>
+    </ng-container>
   </div>
 </div>

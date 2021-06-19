@@ -30,15 +30,38 @@ export class ModelMockService implements IModelService {
             name: 'name',
             label: 'Nome',
             required: true,
-            type: FieldTypeEnum.simpleText,
+            type: FieldTypeEnum.text,
             value: `Registro Maneiro ${key + 1}`,
           },
           {
-            name: 'createdAt',
+            name: 'about_me',
+            label: 'Sobre mim',
+            type: FieldTypeEnum.textarea,
+            value: null,
+          },
+          {
+            name: 'gender',
+            label: 'Gênero',
+            required: true,
+            type: FieldTypeEnum.select,
+            value: 1,
+            options: [
+              { label: 'Feminino', value: 0 },
+              { label: 'Masculino', value: 1 },
+            ]
+          },
+          {
+            name: 'created_at',
             label: 'Data de registro',
-            type: FieldTypeEnum.simpleText,
+            type: FieldTypeEnum.text,
             value: new Date().toDateString(),
             nonEditable: true,
+          },
+          {
+            name: 'active',
+            label: 'Registro ativo',
+            type: FieldTypeEnum.checkbox,
+            value: true,
           }
         ]
       }));

@@ -1,6 +1,7 @@
 import { IField } from "../interfaces/field.interface";
 import { IModelData } from "../interfaces/model-data.interface";
-import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
+import { ModelFormControl } from "./model-form-control.helper";
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 
 export class ModelFormGroupHelper extends FormGroup {
 
@@ -22,7 +23,8 @@ export class ModelFormGroupHelper extends FormGroup {
   private addModelControls() {
     this.modelData?.fields.forEach((field: IField) => {
       const value = field.value || field.defaultValue;
-      this.addControl(field.name, new FormControl(value));
+      const validators = field.required ? [Validators.required] : [];
+      this.addControl(field.name, new ModelFormControl(field, value, validators,));
     });
   }
 
