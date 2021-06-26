@@ -1,6 +1,7 @@
 <div class="fields-container">
   <div *ngFor="let control of getControls()">
     <ng-container [ngSwitch]="control.field.type">
+      <mf-upload *ngSwitchCase="types.upload" [control]="control"></mf-upload>
       <mf-select *ngSwitchCase="types.select" [control]="control"></mf-select>
       <mf-textarea *ngSwitchCase="types.textarea" [control]="control"></mf-textarea>
       <mf-checkbox *ngSwitchCase="types.checkbox" [control]="control"></mf-checkbox>

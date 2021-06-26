@@ -40,6 +40,20 @@ export class ModelMockService implements IModelService {
             value: null,
           },
           {
+            name: 'image',
+            label: 'Imagem',
+            type: FieldTypeEnum.upload,
+            value: null,
+            accepts: ['.gif','.jpg','.jpeg','.png']
+          },
+          {
+            name: 'document',
+            label: 'PDF',
+            type: FieldTypeEnum.upload,
+            value: null,
+            accepts: ['.doc','.docx','.pdf']
+          },
+          {
             name: 'gender',
             label: 'Gênero',
             required: true,

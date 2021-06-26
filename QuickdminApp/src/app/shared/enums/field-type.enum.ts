@@ -3,6 +3,7 @@ export enum FieldTypeEnum {
   email = 'email',
   number = 'number',
   select = 'select',
+  upload = 'upload',
   password = 'password',
   checkbox = 'checkbox',
   textarea = 'textarea',

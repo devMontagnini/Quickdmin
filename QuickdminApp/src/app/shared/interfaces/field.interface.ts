@@ -9,5 +9,4 @@ export interface IField {
   defaultValue?: any;
   type: FieldTypeEnum;
   nonEditable?: boolean;
-  options?: { label: string, value: any }[];
 }

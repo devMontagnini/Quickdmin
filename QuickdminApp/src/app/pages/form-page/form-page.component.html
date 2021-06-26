@@ -16,18 +16,10 @@
   <fieldset [disabled]="submittingForm">
     <app-model-form [formGroup]="modelFormGroup"></app-model-form>
     <div class="btns">
-      <button 
-        [class.spinner]="submittingForm" 
-        [disabled]="modelFormGroup?.invalid || submittingForm" 
-        mat-raised-button 
-        color="primary">
+      <button [class.spinner]="submittingForm" [disabled]="modelFormGroup?.invalid" mat-raised-button color="primary">
         Enviar
       </button>
-      <button 
-        *ngIf="modelHasListPage"
-        [disabled]="submittingForm"
-        (click)="onBackPage($event)" 
-        mat-raised-button>
+      <button *ngIf="modelHasListPage" (click)="onBackPage($event)" mat-raised-button>
         Voltar
       </button>
     </div>

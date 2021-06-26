@@ -1,0 +1,23 @@
+<div class="upload-container">
+  <div class="label">{{control.field.label}}</div>
+  <ng-container [ngSwitch]="getContentType()">
+    <img *ngSwitchCase="'image'" [src]="getImageContent()" />
+    <div *ngSwitchCase="'document'" class="uploaded" >
+      <mat-icon>description</mat-icon>
+      <strong>{{getFileName()}}</strong>
+    </div>
+  </ng-container>
+  <div *ngIf="loadingFile" class="loading-file">
+    <mat-spinner diameter="20"></mat-spinner>
+    <span>Carregando arquivo...</span>
+  </div>
+  <input
+    type="file" 
+    style="display: none;"
+    [accept]="getAccepts()"
+    [id]="control.field.name"
+    (change)="selectFile($event)"/>
+  <label [for]="control.field.name" class="mat-button mat-raised-button mat-primary">
+    Selecionar Arquivo
+  </label>
+</div>
