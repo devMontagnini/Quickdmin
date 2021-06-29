@@ -1,4 +1,4 @@
-import { IField } from "../interfaces/field.interface";
+import { IField } from "../interfaces/fields/field.interface";
 import { IModelData } from "../interfaces/model-data.interface";
 import { ModelFormControl } from "./model-form-control.helper";
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormGroup, ValidatorFn, Validators } from "@angular/forms";

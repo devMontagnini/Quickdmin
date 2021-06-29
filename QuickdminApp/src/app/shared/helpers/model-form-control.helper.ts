@@ -1,6 +1,6 @@
-import { IField } from "../interfaces/field.interface";
-import { IImageField } from "../interfaces/image-field.interface";
-import { ISelectField } from "../interfaces/select-field.interface";
+import { IField } from "../interfaces/fields/field.interface";
+import { IImageField } from "../interfaces/fields/image-field.interface";
+import { ISelectField } from "../interfaces/fields/select-field.interface";
 import { AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn } from "@angular/forms";
 
 export class ModelFormControl extends FormControl {

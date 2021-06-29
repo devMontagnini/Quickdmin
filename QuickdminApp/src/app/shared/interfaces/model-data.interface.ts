@@ -1,6 +1,6 @@
-import { IField } from "./field.interface";
-import { IImageField } from "./image-field.interface";
-import { ISelectField } from "./select-field.interface";
+import { IField } from "./fields/field.interface";
+import { IImageField } from "./fields/image-field.interface";
+import { ISelectField } from "./fields/select-field.interface";
 
 export interface IModelData {
   id: number;

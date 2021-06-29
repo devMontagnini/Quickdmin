@@ -1,7 +1,7 @@
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Component, forwardRef, Input } from "@angular/core";
 import { ModelFormControl } from "../../../../shared/helpers/model-form-control.helper";
-import { ISelectField } from "src/app/shared/interfaces/select-field.interface";
+import { ISelectField } from "../../../../shared/interfaces/fields/select-field.interface";
 
 @Component({
   selector: 'mf-select',

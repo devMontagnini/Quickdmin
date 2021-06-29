@@ -1,7 +1,7 @@
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Component, forwardRef, Input } from "@angular/core";
 import { ModelFormControl } from "../../../../shared/helpers/model-form-control.helper";
-import { IImageField } from "src/app/shared/interfaces/image-field.interface";
+import { IImageField } from "../../../../shared/interfaces/fields/image-field.interface";
 
 @Component({
   selector: 'mf-upload',
